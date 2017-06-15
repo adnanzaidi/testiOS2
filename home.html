@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="theme-color" content="#0000FF">
+    <meta name="msapplication-navbutton-color" content="#0000FF">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0000FF">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="./css/boot.css" />
+    <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link href="./css/navbar-fixed-top.css" rel="stylesheet">
+    <script>
+    var isDeviceReady = false;
+    var fs;
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-md">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle sidebar-toggle left-menu-bar-btn">
+                    <span class="icon-bar">
+               </span>
+                    <span class="icon-bar">
+               </span>
+                    <span class="icon-bar">
+               </span></button>
+                <div class="dropdown pull-right">
+                    <form class="navbar-form navbar-right">
+                        <div id="search-form2">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <a href="home.html" class="home btn btn-default"><span class="glyphicon glyphicon-home"></span></a>
+                                    <a href="messages.html" class="btn btn-default"><span class="glyphicon glyphicon-envelope"></span></a>
+                                    <div class="btn-group">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="glyphicon glyphicon-info-sign">
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li><a href="#" data-toggle="modal" data-target="#profile">My Profile</a></li>
+                                        <li><a href="#" data-toggle="modal" data-target="#contact">Contact Us</a></li>
+                                        <li><a href="#" data-toggle="modal" data-target="#about">About Us</a></li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </nav>
+    <div class="sidebar-overlay"></div>
+    <aside id="sidebar" class="sidebar sidebar-default sidebar-fixed-left" role="navigation">
+        <div> <img src="img/logo.gif" class="img-responsive left-logo" /> </div>
+        <div class="col-md-12">
+            <form id="search-form">
+                <div class="input-group">
+                  <input type="text" placeholder="Search brand" class="form-control search-text" />
+                  <span class="input-group-btn">
+                    <a href="#" class="btn btn-default submit"><span class="glyphicon glyphicon-search"></span></a>
+                  </span>
+                </div>
+            </form>
+        </div>
+        <div id="subcats_list"></div>
+    </aside>
+    <div class="container">
+        <div class="row" style="margin-top:15px; padding:5px;">
+            <div id="messages">
+                <h1 class="main-heading"></h1>
+                <!-- videos fetched here from ajax -->
+                <div id="dummyContent"><div class="videos-container"></div></div>
+                <div id="messagesList">
+                </div>
+                <div id="date_loader" class="loader" style="display: none;"></div>
+                <div id="noMore" style="display: none;">No more videos</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" z-index:999999999 !important">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Contact Us</h4>
+                </div>
+                <div class="modal-body" align="center">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2>Address
+                </h2>
+                            <p>43H/III, Unit # 2, Street 43, Block 6, P.E.C.H.S., near FEDEX Corporate Office, off Razi Road, Karachi -75400 Pakistan.
+                            </p>
+                            <p>For any Query: </p>
+                            <p>T 92 21 34306575 to 7</p>
+                            <p>F 92 21 34306578
+                            </p>
+                            <p>Email : <a style="color:404040" href="mailto:info@mediamonitors.com.pk"> info@mediamonitors.com.pk</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="aboutLabel" style=" z-index:999999999 !important">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="aboutLabel">About Us</h4>
+                </div>
+                <div class="modal-body" align="center">
+                    <!--<h1 style="color:red; margin-top: 0;">Introduction</h1>-->
+                    <p> Media Monitors Pakistan is a project and brand name of Media Info System Pvt. Ltd. We are glad to introduce our media monitoring company under the brand ‘Media Monitors’ which is lead by some known and experienced people in the field of Media Monitoring and Information Technology.</p>
+                    <p>The rich industry experience and young talented team of technology researchers has developed a system which delivers monitoring data within shortest time with maximum accuracy and les resource consumption.</p>
+                    <p>Our Company’s expertise includes:</p>
+                    <small>
+<ul>
+<li>Advertisement Tracking: Keeping commercial airtime/space auditing and complete veri- fiable data for the industry.</li>
+<li>Content Monitoring : Relate to monitor the non-commercial part of transmission /publications.</li>
+<li>Media Archiving: Long term search able Record keeping of Media Assets on electronic and print media</li>
+    </ul>
+    </small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="profileLabel" style=" z-index:999999999 !important">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="profileLabel">Profile</h4>
+                </div>
+                <div class="modal-body" align="center">
+                    <div class="form-group">
+                        <div class="text-left">
+                            <label>Username</label>
+                            <input type="text" value="Loading..." id="user_name" readonly disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-left">
+                            <label>Phone</label>
+                            <input type="text" value="Loading..." id="user_phone" readonly disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-left">
+                            <label>Email</label>
+                            <input type="email" value="Loading..." id="user_email" readonly disabled class="form-control" />
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <div class="text-left">
+                            <label>Company</label>
+                            <input type="text" value="Loading..." id="user_company" readonly disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                    	<a id="btn-logout" class="btn btn-success" href="javascript:void();">LogOut</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="sharing" tabindex="-1" role="dialog" aria-labelledby="sharinglabel" style=" z-index:999999999 !important">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="sharinglabel">Choose sharing method</h4>
+                </div>
+                <div class="modal-body" align="center">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" data-id="app">
+                                <h4 class="panel-title">
+                                    <a href="#app-sharing" data-toggle="collapse" data-parent="#accordion">App Sharing</a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse in" id="app-sharing">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="text-left">
+                                            <label>Name</label>
+                                            <input type="text" id="app-sharing-name" class="form-control" data-name="name" placeholder="eg. Ali" required="required" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="text-left">
+                                            <label>Number</label>
+                                            <input type="number" id="app-sharing-number" class="form-control" data-name="number" placeholder="eg. 03325675433" required="required" />
+                                            <a href="#" id="choose-contact" class="btn btn-info"><span class="glyphicon glyphicon-user"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						<div class="panel panel-default">
+							<div class="panel-heading" data-id="email">
+								<h4 class="panel-title">
+									<a href="#email-sharing" data-toggle="collapse" data-parent="#accordion">Email Sharing</a>
+								</h4>
+							</div>
+							<div class="panel-collapse collapse" id="email-sharing">
+								<div class="panel-body">
+									<div class="form-group">
+										<div class="text-left">
+											<label>Name</label>
+											<input type="text" id="email-sharing-name" class="form-control" data-name="name" placeholder="eg. Ali" required="required" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="text-left">
+											<label>Email</label>
+											<input type="email" id="email-sharing-email" class="form-control" data-name="email" placeholder="eg. abc@example.com" required="required" />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="text-left">
+											<label>Your Email</label>
+											<input type="email" id="email-sharing-your-email" class="form-control" data-name="your_email" placeholder="xyz@example.com" required="required" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="app-sharing-button" data-sharing-type="app" class="ok-btn">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript" src="cordova.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/custom.js"></script>
+    <script src="./js/video.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jwplayer.js"></script>
+    <script src="./js/template-manager.js"></script>
+    <script>
+    jQuery(function($) {
+        var server_url = getServerUrl();
+        var network_error = getServerErrorMessage();
+        var network_error_title = getServerErrorMessageTitle();
+        var connection_error = getInternetConnectionMessage();
+        var connection_error_title = getInternetConnectionMessageTitle();
+        var url = getRootUrl();
+        var current_page = 1;
+        var limit = 3;
+        var total_pages = -1;
+        var isDatesLoading = {};
+        var isYearsLoading = false;
+        var isMonthsLoading = {};
+        var videoInitializer = {};
+        var user_id = localStorage.getItem("user_id");
+        var subcats = [];
+
+        $div = $("#messagesList");
+        showDateLoader();
+
+        if (user_id == "" || typeof user_id == "undefined") {
+            redirect(url + "/index.html");
+        }
+
+        function onBackPressed(e) {
+            e.preventDefault();
+			user_log("Activity Closed");
+            navigator.app.exitApp();
+        }
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+		
+			document.addEventListener("backbutton", onBackPressed, false);
+
+            isDeviceReady = true;
+			
+            window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+                function onFileSystemSuccess(fileSystem) {
+                    fs = fileSystem;
+                    fileSystem.root.getDirectory('MM TVC', {
+                        create: true,
+                        exclusive: false
+                    }, onDirectorySuccess, onDirectoryFail);
+                },
+                function onFileSystemFailure() {
+                    console.log("Failed to get file system");
+                });
+            
+			
+			networkinterface.getIPAddress(function (ip) {
+                localStorage.setItem("ip",ip); 
+			});
+			
+            /*
+            setupPushNotification(function(data) {
+                    // data.registrationId
+                    localStorage.setItem("registrationId", data.registrationId);
+                    regid = data.registrationId;
+                },
+                function(data) {
+                    // data.message,
+                    // data.title,
+                    // data.count,
+                    // data.sound,
+                    // data.image,
+                    // data.additionalData
+                    //dialog(data.message);
+                },
+                function(e) {
+                    // e.message
+                    console.log(e.message);
+                });
+            */
+
+            showDateLoader();
+            fetchUserData();
+
+            user_log("Activity Open");
+
+            //cordova.dialogGPS();
+            //navigator.geolocation.getCurrentPosition(onGpsSuccess, onGpsError);
+        }
+
+        function onGpsSuccess(pos) {
+            lat = pos.coords.latitude;
+            lng = pos.coords.longitude;
+
+            locateUser(pos);
+        }
+
+        function onGpsError(error) {
+            cordova.dialogGPS();
+        }
+
+        function onDirectorySuccess() {
+            console.log("Directory created successfully");
+        }
+
+        function onDirectoryFail() {
+            console.log("Failed to create directory");
+        }
+
+        $('.modal').on('show.bs.modal', function() {
+            $('.sidebar-overlay').removeClass('active');
+            $('#sidebar').removeClass('open');
+
+            if ($(this).attr("id") == 'profile') {
+                fetchUserData();
+            }
+        });
+
+        function showLoader(elem) {
+            if(elem.find(".loader").length <= 0) {
+        		var loader = $("<div/>")
+        						.addClass("loader");
+        		elem.append(loader);
+        	} else
+                elem.find(".loader").slideDown();
+            //elem.parent().find(".date-header").addClass("loading");
+        }
+
+        function showDateLoader() {
+            $("#date_loader").slideDown();
+        }
+
+        function hideLoader(elem) {
+            elem.find(".loader").slideUp();
+            //elem.parent().find(".date-header").removeClass("loading");
+        }
+
+        function hideDateLoader() {
+            $("#date_loader").slideUp();
+        }
+
+        function showRetryView() {
+            $("#messagesList").addClass("retry");
+        }
+
+        function hideRetryView() {
+            $("#messagesList").removeClass("retry");
+        }
+
+        function emptyDataList() {
+            $("#messagesList").empty();
+        }
+
+        function showNoDataFound() {
+        	$heading = $("<h3/>").text("No video found");
+        	$("#messagesList").append($heading);
+        }
+
+        function setMainHeading(text) {
+            if (text == "")
+                $("#messages").find(".main-heading").hide();
+            else
+                $("#messages").find(".main-heading").show();
+            $("#messages").find(".main-heading").text(text);
+        }
+
+        function slideDown(elem) {
+            elem.slideDown();
+        }
+
+        function locateUser(pos) {
+            $.ajax({
+                url: server_url + "/action.php?action=updateUserLocation",
+                data: {
+                    "latitude": pos.coords.latitude,
+                    "longitude": pos.coords.longitude,
+                    "userid": user_id
+                },
+                dataType: "JSON",
+                type: "POST",
+                success: function() {
+                    console.log("location submitted");
+                },
+                error: function(e) {
+                    console.log(JSON.stringify(e));
+                }
+            });
+        }
+
+        var userFetched = false;
+        function fetchUserData() {
+            $storedPhone = localStorage.getItem("phone");
+            if ($storedPhone != null) {
+                $.ajax({
+                    url: server_url + "/fetch.php",
+                    data: {
+                        action: "usersByPhone",
+                        phone: $storedPhone
+                    },
+                    dataType: "JSON",
+                    type: "GET",
+                    success: function(response) {
+                        var users = response.data;
+                        var found = false;
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i].personNumber == $storedPhone) {
+                                $("#user_name").val(users[i].personName);
+                                $("#user_phone").val(users[i].personNumber);
+                                $("#user_email").val(users[i].email);
+                                $("#user_company").val(users[i].company);
+
+                                localStorage.setItem("user_email", users[i].email);
+                                localStorage.setItem("phone", users[i].personNumber);
+                                localStorage.setItem("user_name", users[i].personName);
+                                localStorage.setItem("company", users[i].company);
+								
+                                found = true;
+
+                                if(!userFetched)
+                                    fetchSubCats();
+
+                                //loadDummyContent();
+            					//scanFiles();
+
+                                userFetched = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                            dialog("User not found");
+                    },
+                    error: function(err) {
+                        console.log(err);
+
+                        if(isConnected())
+                            dialog(network_error, network_error_title);
+                        else
+                            dialog(connection_error, connection_error_title);
+                    }
+                });
+            } else {
+                dialog("User identity not found", "Failed");
+            }
+        }
+
+        function loadDummyContent() {
+            var videos = [
+                            {
+                              "brandName": "Doctor Fast Tooth Paste",
+                              "categoryName": "Oral Care",
+                              "categoryID": "82",
+                              "subcategoryName": "Tooth Paste",
+                              "captionName": "Doctor Fast Tooth Paste (Doctor Fast Abhi Brush Abhi Faida - Dr Imran Ishaq Adpt)",
+                              "captionID": "730914",
+                              "Duration": "7",
+                              "insertDate": "2016-11-30 18:34:49",
+                              "startTime": "20:30:10",
+                              "filePath": "http://172.168.100.197:8383/branddirectory/82/740/32141/319/",
+                              "fileName": "730914_10.mp4",
+                              "transmissionDate": "2016-11-29 00:00:00",
+                              "videoDuration": "10",
+                              "channelName": "Capital TV",
+                              "commercialTypeName": "Spot/TVC"
+                            },
+                            {
+                              "brandName": "Waqar Builders &amp; Developers",
+                              "categoryName": "Construction",
+                              "categoryID": "8",
+                              "subcategoryName": "Builders",
+                              "captionName": "Waqar Builder And Developers (Doctor Lain Sadar Hyderabad - Blue Theme)",
+                              "captionID": "675570",
+                              "Duration": "35",
+                              "insertDate": "2016-11-27 18:39:13",
+                              "startTime": "16:27:28",
+                              "filePath": "http://172.168.100.197:8383/branddirectory/8/92/14071/095/",
+                              "fileName": "675570_35.mp4",
+                              "transmissionDate": "2016-11-26 00:00:00",
+                              "videoDuration": "35",
+                              "channelName": "SAMAA",
+                              "commercialTypeName": "Spot/TVC"
+                            },
+                            {
+                              "brandName": "Bisconi Chocolatto",
+                              "categoryName": "Confectionery",
+                              "categoryID": "3",
+                              "subcategoryName": "Biscuits",
+                              "captionName": "Bisconni Chocolatto (New Its Special Inside - Starting From Biscuit)",
+                              "captionID": "675598",
+                              "Duration": "5",
+                              "insertDate": "2016-11-27 16:04:45",
+                              "startTime": "01:11:54",
+                              "filePath": "http://172.168.100.197:8383/branddirectory/3/27/24433/081/",
+                              "fileName": "675598_5.mp4",
+                              "transmissionDate": "2016-11-26 00:00:00",
+                              "videoDuration": "5",
+                              "channelName": "DAWN NEWS",
+                              "commercialTypeName": "Spot/TVC"
+                            },
+                            {
+                              "brandName": "Jam-e-Sheerin",
+                              "categoryName": "Beverages",
+                              "categoryID": "10",
+                              "subcategoryName": "Soft Drinks",
+                              "captionName": "Qarshi Jam-e-Sheerin (Starting From Family)",
+                              "captionID": "730116",
+                              "Duration": "19",
+                              "insertDate": "2016-11-27 15:41:54",
+                              "startTime": "22:43:42",
+                              "filePath": "http://172.168.100.197:8383/branddirectory/10/100/14174/008/",
+                              "fileName": "730116_20.mp4",
+                              "transmissionDate": "2016-11-26 00:00:00",
+                              "videoDuration": "20",
+                              "channelName": "PTV  NEWS",
+                              "commercialTypeName": "Spot/TVC"
+                            },
+                            {
+                              "brandName": "K&amp;Ns",
+                              "categoryName": "Food",
+                              "categoryID": "19",
+                              "subcategoryName": "Pack Food",
+                              "captionName": "K&amp;NS (Safe And Healthy Chicken - Free Home Deliverry - Cartoon - Adpt 1)",
+                              "captionID": "729985",
+                              "Duration": "14",
+                              "insertDate": "2016-11-26 12:17:19",
+                              "startTime": "15:27:52",
+                              "filePath": "http://172.168.100.197:8383/branddirectory/19/304/16743/140/",
+                              "fileName": "729985_14.mp4",
+                              "transmissionDate": "2016-11-25 00:00:00",
+                              "videoDuration": "14",
+                              "channelName": "City 42",
+                              "commercialTypeName": "Spot/TVC"
+                            },
+                            {
+                              "brandName": "Mughal Steel",
+                              "categoryName": "Construction",
+                              "categoryID": "8",
+                              "subcategoryName": "Steel",
+                              "captionName": "Mughal Supreme (Earthquake Resistant Steel Bar - Differenet People)",
+                              "captionID": "730006",
+                              "Duration": "17",
+                              "insertDate": "2016-11-26 12:04:55",
+                              "startTime": "18:16:59",
+                              "filePath": "http://172.168.100.197:8383/branddirectory/8/68/12601/140/",
+                              "fileName": "730006_19.mp4",
+                              "transmissionDate": "2016-11-25 00:00:00",
+                              "videoDuration": "19",
+                              "channelName": "City 42",
+                              "commercialTypeName": "Spot/TVC"
+                            }
+                        ];
+            var elem = $("#dummyContent .videos-container");
+            for (var i = 0; i < videos.length; i++) {
+                if(elem.find("#video"+videos[i].captionID).length <= 0) {
+                    var video_obj = getSingleVideoTemplate(videos[i]);
+                    elem.append(video_obj);
+                }
+            }
+        }
+
+        function fetchSubCats() {
+            
+            $("#subcats_list").empty();
+
+            $.ajax({
+                url: server_url + "/fetch.php?action=subcats&user_id=" + user_id,
+                dataType: "JSON",
+                success: function(e) {
+
+                    subcats = e.data;
+                    
+                    for(var i = 0; i < subcats.length; i++) {
+                        var cat = subcats[i];
+
+                        $pnl = $("<div/>")
+                                .addClass("panel-group");
+                        $pnl_style = $("<div/>")
+                                .addClass("panel panel-default");
+                        $heading = $("<div/>")
+                                .addClass("panel-heading");
+                        $h4 = $("<h4/>")
+                                .addClass("panel-title");
+                        $h4_a = $("<a/>")
+                                .attr("data-toggle", "collapse")
+                                .attr("href", "#subcat-item-" + cat.subcategoryID)
+                                .text(cat.subcategoryName);
+
+                        $h4.append($h4_a);
+                        $heading.append($h4);
+                        $pnl_style.append($heading);
+
+                        $dv = $("<div/>")
+                                .attr("id", "subcat-item-" + cat.subcategoryID)
+                                .addClass("panel-collapse collapse");
+                        $pnl_body = $("<div/>")
+                                .attr("data-subcat", cat.subcategoryID)
+                                .addClass("panel-body");
+                        $list = $("<ul/>")
+                                .addClass("list");
+
+                        $pnl_body.append($list);
+                        $dv.append($pnl_body);
+
+                        $pnl_style.append($dv);
+                        $pnl.append($pnl_style);
+
+                        $("#subcats_list").append($pnl);
+                    }
+
+                    fetchBrands();
+                },
+                error: function(e) {
+                    $("#subcats_list").empty();
+                    console.log(e);
+                }
+            });
+        }
+
+        function fetchBrands() {
+
+            var url = server_url + "/fetch.php?action=brands&user_id=" + user_id;
+
+            $.ajax({
+                url: url,
+                dataType: "JSON",
+                type: "GET",
+                success: function(e) {
+                    var brands = e.data;
+                    //console.log(JSON.stringify(brands));
+                    for(var i = 0; i < brands.length; i++) {
+                        
+                        var brand = brands[i];
+                        var list = $("div[data-subcat=" + brand.subcategoryID + "]").find("ul.list");
+
+                        if(typeof list != "undefined") {
+                            var li = $("<li/>");
+                            var ahref = $("<a/>")
+                                            .attr("href", "#")
+                                            .attr("data-name", brand.brandName)
+                                            .text(brand.brandName);
+                            li.append(ahref);
+                            list.append(li);
+                        }
+                    }
+
+                    $("div[data-subcat]").each(function() {
+                        if($(this).find("ul.list li").length <= 0)
+                            $(this).parents(".panel-group .panel-body").append("<span>No brand found</span>");
+                    });
+
+                    fetchYears();
+                },
+                error: function(e) {
+                    console.log(e);
+                    fetchYears();
+                }
+            });
+        }
+
+        function fetchVideos(elem, date) {
+
+            elem.empty();
+
+            slideDown(elem);
+            showLoader(elem);
+
+            $.ajax({
+                url: server_url + "/fetch.php?action=videos",
+                data: {
+                    user_id: user_id,
+                    date: date,
+                    search_text: $("#search-form .search-text").val()
+                },
+                dataType: "JSON",
+                type: "POST",
+                success: function(response) {
+
+                    var videos = response.data;
+
+                    if(videos.length > 0) {
+                        for (var i = 0; i < videos.length; i++) {
+                        	if(elem.find("#video"+videos[i].captionID).length <= 0) {
+    	                        var video_obj = getSingleVideoTemplate(videos[i]);
+    	                        elem.append(video_obj);
+                        	}
+                        }
+                    } else {
+                        elem.append($("<h4/>").addClass("text-center").text("No video found"));
+                    }
+                    hideLoader(elem);
+                },
+                error: function(err) {
+                    console.log(err);
+
+                    hideLoader(elem);
+                    
+                    if(isConnected())
+                        dialog(network_error, network_error_title);
+                    else
+                        dialog(connection_error, connection_error_title);
+                }
+            });
+        }
+
+        function getCounter(elem, date) {
+            var data = {
+                    user_id: user_id,
+                    date: date,
+                    search_text: $("#search-form .search-text").val()
+                };
+                console.log(JSON.stringify(data));
+                console.log(server_url + "/fetch.php?action=videos");
+
+            $.ajax({
+                url: server_url + "/fetch.php?action=videos",
+                data: data,
+                dataType: "JSON",
+                type: "POST",
+                success: function(response) {
+                    var videos = response.data;
+                    elem.parents(".single-video-by-date").find(".counter").text(videos.length);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function formatDate(d) {
+            var month = d.getMonth() + 1;
+            if (month < 10)
+                month = "0" + month;
+
+            var dte = d.getDate();
+            if (dte < 10)
+                dte = "0" + dte;
+
+            return d.getFullYear() + "-" + month + "-" + dte;;
+        }
+
+        function subscript(n) {
+            if(n == 1)
+                return "st";
+            else if(n == 2)
+                return "nd";
+            else if(n == 3)
+                return "rd";
+            else
+                return "th";
+        }
+
+        function fetchYears() {
+
+        	if(isYearsLoading)
+        		return;
+
+            var data = {
+                user_id: user_id,
+                start_date: "2016-11-01",
+                search_text: $("#search-form .search-text").val()
+            };
+
+            isYearsLoading = true;
+
+            emptyDataList();
+            showDateLoader();
+
+            $.ajax({
+                url: server_url + "	/fetch.php?action=videosYears",
+                data: data,
+                dataType: "JSON",
+                type: "POST",
+                success: function(response) {
+
+                    var dates = response.data;
+
+                    for (var i = 0; i < dates.length; i++) {
+
+                        var date_obj = $("<div/>")
+                            .attr("data-month", dates[i])
+                            .addClass("single-video-by-year");
+                        var container = $("<div/>")
+                            .addClass("months-container")
+                            .addClass("closed")
+                            .hide();
+                        var loader = $("<div/>")
+                            .addClass("loader")
+                            .hide();
+                        var container_left = $("<div/>")
+                            .addClass("col-md-6");
+                        var date_header = $("<div/>")
+                            .addClass("date-header");
+                        var container_right = $("<div/>")
+                            .addClass("col-md-6");
+						var date_text = $("<span/>")
+                        	.addClass("datetext")
+                        	.text(dates[i] + " ");
+                        var counter = $("<span/>")
+                        	.addClass("counter badge")
+                        	.text("...	")
+                        	.hide();
+                       	var clearfix = $("<div/>")
+                       		.addClass("clearfix");
+
+						date_header.append(date_text);
+
+                        container_left.append(loader);
+
+                        container.append(container_left);
+                        container.append(container_right);
+
+                        date_obj.append(date_header);
+                        date_obj.append(container);
+
+                        $div.append(date_obj);
+
+                        if(i == 0) {
+                            container.show();
+                            fetchMonths(container, dates[i]);
+                            container.removeClass("closed");
+                        }
+                    }
+                    hideDateLoader();
+                    isYearsLoading = false;
+
+                    if(dates.length <= 0)
+                    	showNoDataFound();
+                },
+                error: function(error) {
+                    console.log(JSON.stringify(error));
+
+                    hideDateLoader();
+                    showRetryView();
+                    isYearsLoading = false;
+
+                    if(isConnected())
+                        dialog(network_error, network_error_title);
+                    else
+                        dialog(connection_error, connection_error_title);
+                }
+            });
+        }
+
+        function fetchMonths(elem, year) {
+
+            if(typeof isMonthsLoading[year] == "undefined")
+                isMonthsLoading[year] = false;
+
+        	if(isMonthsLoading[year])
+        		return;
+
+            var months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            var data = {
+                user_id: user_id,
+                year: year,
+                search_text: $("#search-form .search-text").val()
+            };
+
+            isMonthsLoading[year] = true;
+            var firstMonth;
+
+            elem.empty();
+
+            slideDown(elem);
+            showLoader(elem);
+
+            $("html,body").animate({
+            	scrollTop: (elem.prev().offset().top - (elem.prev().outerHeight()+20))
+            }, 500);
+
+            $.ajax({
+                url: server_url + "	/fetch.php?action=videosMonths",
+                data: data,
+                dataType: "JSON",
+                type: "POST",
+                success: function(response) {
+
+                    var dates = response.data;
+
+                    for (var i = 0; i < dates.length; i++) {
+
+                        var date_obj = $("<div/>")
+                            .attr("data-month", dates[i])
+                            .attr("data-year", year)
+                            .addClass("single-video-by-month");
+                        var container = $("<div/>")
+                            .addClass("dates-container")
+                            .addClass("closed")
+                            .hide();
+                        var loader = $("<div/>")
+                            .addClass("loader")
+                            .hide();
+                        var container_left = $("<div/>")
+                            .addClass("col-md-6");
+                        var date_header = $("<div/>")
+                            .addClass("date-header");
+                        var container_right = $("<div/>")
+                            .addClass("col-md-6");
+						var date_text = $("<span/>")
+                        	.addClass("datetext")
+                        	.text(months[dates[i]-1] + " ");
+                       	var clearfix = $("<div/>")
+                       		.addClass("clearfix");
+
+						date_header.append(date_text);
+
+                        container_left.append(loader);
+
+                        container.append(container_left);
+                        container.append(container_right);
+
+                        date_obj.append(date_header);
+                        date_obj.append(container);
+
+                        elem.append(date_obj);
+
+                        if (i == 0)
+                            firstMonth = date_obj;
+                    }
+                    hideLoader(elem);
+                    isMonthsLoading[year] = false;
+
+                    if(typeof firstMonth != "undefined")
+                        firstMonth.find(".date-header").trigger("click");
+
+                    //container.show();
+                    //fetchDates(container, dates[i], year);
+                    //container.removeClass("closed");
+                },
+                error: function(error) {
+                    console.log(JSON.stringify(error));
+
+                    hideLoader(elem);
+                    isMonthsLoading[year] = false;
+
+                    if(isConnected())
+                        dialog(network_error, network_error_title);
+                    else
+                        dialog(connection_error, connection_error_title);
+                }
+            });
+        }
+
+        function fetchDates(elem, month, year) {
+
+            var k = month+""+year;
+
+            if(typeof isDatesLoading[k] == "undefined")
+                isDatesLoading[k] = false;
+
+            if(isDatesLoading[k])
+                return;
+
+            var data = {
+                user_id: user_id,
+                month: month,
+                year: year,
+                search_text: $("#search-form .search-text").val()
+            };
+
+            isDatesLoading[k] = true;
+            var firstDate;
+
+            elem.empty();
+
+            slideDown(elem);
+            showLoader(elem);
+
+            $.ajax({
+                url: server_url + " /fetch.php?action=videosDates",
+                data: data,
+                dataType: "JSON",
+                type: "POST",
+                success: function(response) {
+
+                    var dates = response.data;
+					
+					for(var j = 0; j < (dates.length % 7); j++) {
+						console.log(j);
+					}
+
+                    for (var i = 0; i < dates.length; i++) {
+
+                        var date_obj = $("<div/>")
+                            .attr("data-date", dates[i])
+                            .addClass("single-video-by-date");
+                        var container = $("<div/>")
+                            .addClass("videos-container")
+                            .addClass("closed")
+                            .hide();
+                        var loader = $("<div/>")
+                            .addClass("loader")
+                            .hide();
+                        var container_left = $("<div/>")
+                            .addClass("col-md-6");
+                        var date_header = $("<div/>")
+                            .addClass("date-header");
+                        var container_right = $("<div/>")
+                            .addClass("col-md-6");
+                        var date_text = $("<span/>")
+                            .addClass("datetext")
+                            .text(dates[i] + "");
+                        var clearfix = $("<div/>")
+                            .addClass("clearfix");
+                        var counter = $("<span/>")
+                                .addClass("counter badge")
+                                .text("...");
+
+                        date_header.append(date_text);
+                        date_header.append(counter);
+
+                        container_left.append(loader);
+
+                        container.append(container_left);
+                        container.append(container_right);
+
+                        date_obj.append(date_header);
+                        date_obj.append(container);
+
+                        elem.append(date_obj);
+
+                        getCounter(container, dates[i]);
+
+                        if (i == 0)
+                            firstDate = date_obj;
+                    }
+                    hideLoader(elem);
+                    isDatesLoading[k] = false;
+
+                    if(typeof firstDate != "undefined")
+                        firstDate.find(".date-header").trigger("click");
+                },
+                error: function(error) {
+                    console.log(JSON.stringify(error));
+
+                    hideLoader(elem);
+                    isDatesLoading[k] = false;
+
+                    if(isConnected())
+                        dialog(network_error, network_error_title);
+                    else
+                        dialog(connection_error, connection_error_title);
+                }
+            });
+        }
+
+        function resetAll() {
+            $("#search-form").find(".search-text").val("");
+
+            setMainHeading("");
+            fetchYears();
+        }
+        /*
+        function resetSubCats() {
+            $("#subcats_list .panel-group").each(function() {
+                $(this).removeClass("active");
+                $(this).find("ul").slideUp();
+            });
+        }
+
+        $(document).on("click", "#subcats_list .panel-heading", function(e) {
+            e.preventDefault();
+
+            $li = $(this).parents('.panel-group');
+
+            if($li.hasClass("active")) {
+                $li.removeClass("active");
+                $li.find("ul").slideUp();
+            } else {
+                resetSubCats();
+                $li.addClass("active");
+            }
+        });
+
+        */
+        $(document).on("click", "#subcats_list li a", function(e) {
+            e.preventDefault();
+            
+            var val = $(this).attr("data-name");
+            val = $(this).text();
+
+            $(".search-text").val(val);
+            if (val != "" && enableSearching) {
+                setMainHeading("Brand: " + $("#search-form").find(".search-text").val());
+                fetchYears();
+
+                $(".navbar-toggle").trigger("click");
+            }
+        });
+
+        $(document).on('click', '.single-video-by-year .date-header', function(e) {
+            e.preventDefault();
+
+            var obj = $(this).parent();
+            var container = obj.find(".months-container");
+
+            if (container.hasClass("closed")) {
+                fetchMonths(container, obj.data("month"));
+                container.removeClass("closed");
+            } else {
+                container.slideUp();
+                container.addClass("closed");
+            }
+
+        });
+
+        $(document).on('click', '.single-video-by-month .date-header', function(e) {
+            e.preventDefault();
+
+            var obj = $(this).parent();
+            var container = obj.find(".dates-container");
+
+            if (container.hasClass("closed")) {
+                fetchDates(container, obj.data("month"), obj.data("year"));
+                container.removeClass("closed");
+            } else {
+                container.slideUp();
+                container.addClass("closed");
+            }
+
+        });
+
+        $(document).on('click', '.single-video-by-date .date-header', function(e) {
+            e.preventDefault();
+
+            var obj = $(this).parent();
+            var container = obj.find(".videos-container");
+
+            if (container.hasClass("closed")) {
+
+                fetchVideos(container, obj.attr("data-date"));
+                getCounter(container, obj.attr("data-date"));
+
+                container.removeClass("closed");
+            } else {
+                container.slideUp();
+                container.addClass("closed");
+            }
+
+        });
+
+        var enableSearching = true;
+
+        $("#search-form").find(".search-text").on("change", function() {
+        	enableSearching = true;
+        });
+
+        $("#search-form .submit").on("click", function(e) {
+            e.preventDefault();
+
+            if ($("#search-form").find(".search-text").val() != "" && enableSearching) {
+                setMainHeading("Brand: " + $("#search-form").find(".search-text").val());
+                enableSearching = false;
+
+                fetchYears();
+            } else {
+            	$("#search-form").find(".search-text").focus();
+            }
+        });
+
+        $("#search-form .home").on("click", function(e) {
+            e.preventDefault();
+
+            resetAll();
+        });
+
+        $(document).on('click', '#messagesList.retry', function(e) {
+            e.preventDefault();
+            hideRetryView();
+            fetchYears();
+        });
+
+        $(document).on('click', '#btn-logout', function(e) {
+        	e.preventDefault();
+        	
+        	localStorage.removeItem("phone");
+			localStorage.removeItem("user_id");
+
+            user_log("Logged out");
+			redirect(url + "/index.html");
+        });
+
+        $(document).on("click", "#choose-contact", function(e) {
+            e.preventDefault();
+
+            navigator.contacts.pickContact(function(contact){
+                if(typeof contact.phoneNumbers != "undefined" && typeof contact.phoneNumbers[0] != "undefined") {
+                    $("#app-sharing-number").val(contact.phoneNumbers[0].value);
+                }
+            },function(err){
+                console.log('Error: ' + err);
+            });
+        });
+
+        $(document).on("click", ".share-button", function() {
+            $("#app-sharing-button").attr("data-caption-id", $(this).data("id"));
+            $("#app-sharing-button").attr("data-file-path", $(this).data("file-path"));
+        });
+
+        $("#sharing .panel-heading").on("click", function() {
+            $("#app-sharing-button").attr("data-sharing-type", $(this).data('id'));
+        });
+
+        $("#app-sharing-button").on("click", function() {
+            var to = {};
+            var userphone = localStorage.getItem("phone");
+            var username = localStorage.getItem("user_name");
+			var stored_email = localStorage.getItem("user_email");
+            var useremail = $("#sharing #email-sharing-your-email").val();
+            var type = $("#app-sharing-button").attr('data-sharing-type');
+            var caption_id = $("#app-sharing-button").attr('data-caption-id');
+            var file_path = $("#app-sharing-button").attr('data-file-path');
+			
+            if(stored_email != useremail && type == 'email')
+			{
+				dialog('Please Enter Your Registered Email','Un-Registered Email');
+				return;
+			}
+			
+            var d = {
+                from_name: username,
+                from_number: userphone,
+            };
+
+            $("#sharing").find(".collapse.in").find("input").each(function() {
+                $name = $(this).data("name");
+                $value = $(this).val();
+
+                d["to_" + $name] = $value;
+            });
+
+            d["caption_id"] = caption_id;
+            d["from_email"] = useremail;
+            d["file_path"] = file_path;
+
+            $.ajax({
+                url: server_url + "/action.php?action=shareVideo&type=" + (type == 'app' ? 'internal' : 'external'),
+                data: d,
+                type: "POST",
+                dataType: "JSON",
+                success: function(e) {
+                    dialog("Video shared successfully", "Shared");
+					
+					$("#sharing").modal("hide");
+					$("#sharing").find(".collapse").collapse("hide");
+                },
+                error: function(e) {
+                    dialog("Video sharing failed", "Failed");
+                }
+            });
+        });
+    });
+	
+    </script>
+</body>
+
+</html>

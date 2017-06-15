@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+      <meta name="theme-color" content="#0000FF">
+      <meta name="msapplication-navbutton-color" content="#0000FF">
+      <meta name="apple-mobile-web-app-status-bar-style" content="#0000FF">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="stylesheet" type="text/css" href="./css/boot.css"/>
+      <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+      <link href="./css/navbar-fixed-top.css" rel="stylesheet">
+   </head>
+   <body class="splash-bg match_parent fadeAfter" data-timeout="500">
+   
+	<div class="center_all">
+		<div class="applogo"><img src="img/logo5.png" id="logostyle" alt="logo" /></div>
+		<div class="content">
+			<p>Media Monitors Pakistan is pleased to introduce its AD HOC ANALYSIS tool for the Pakistan’s electronic media stake holder's. Quick Analytics - with the help of role specific APPS and quick referencing DASH BOARDS shall give actionable insight to the relevant media professionals for quick strategic decisions. </p>
+		</div>
+	</div>
+	<div class="fixBottom">
+		<p class="text-center">Copyright &copy; 2017</p>
+		<p class="text-center">All Rights Reserved</p>
+	</div>
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h4 class="modal-title">Confirm Your Number</h4>
+		  </div>
+		  <div class="modal-body">
+			<div id="num-confirmation">
+				<div class="form-group">
+					<input type="number" name="phone" placeholder="999 999 9999" class="form-control" />
+				</div>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<a id="btn-confirm" class="btn btn-danger">Confirm</a>
+		  </div>
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<script type="text/javascript" src="cordova.js"></script>
+	
+	<script src="./js/jquery.min.js"></script> 
+	<script src="./js/custom.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+	<script src="./js/template-manager.js"></script>
+	
+	<script>
+		var url = getRootUrl();
+		var server_url = getServerUrl();
+		var network_error = getServerErrorMessage();
+        var network_error_title = getServerErrorMessageTitle();
+        var connection_error = getInternetConnectionMessage();
+        var connection_error_title = getInternetConnectionMessageTitle();
+        var imei_error = getImeiErrorMessage();
+        var imei_error_title = getImeiErrorMessageTitle();
+		var imei = "";
+		var user_id = "";
+		var user_imei = "";
+		var phone = "";
+		var user_name = "";
+		var user_email = "";
+		var regid = "";
+		var tokenid = "";
+		var user_company = "";
+		var isLoggedIn = false;
+		
+		jQuery(function($) {
+		
+			var permissions;
+		
+			function canReadPhoneState(status) {
+				if(!status.hasPermission) {
+					permissions.requestPermission(permissions.READ_PHONE_STATE, canReadPhoneState, permitError);
+				} else {
+					getDeviceInfo();
+				}
+			}
+			
+			function getDeviceInfo() {
+				var deviceInfo = cordova.require("cordova/plugin/DeviceInformation");
+				deviceInfo.get(successCallback, errorCallback);
+			}
+			
+			function canReadStorage(status) {
+				if(!status.hasPermission) {
+					permissions.requestPermission(permissions.READ_EXTERNAL_STORAGE, canReadStorage, permitError);
+				}
+			}
+			
+			function canWriteStorage(status) {
+				if(!status.hasPermission) {
+					permissions.requestPermission(permissions.WRITE_EXTERNAL_STORAGE, canWriteStorage, permitError);
+				}
+			}
+			
+			function canUseInternet(status) {
+				if(!status.hasPermission) {
+					permissions.requestPermission(permissions.INTERNET, canUseInternet, permitError);
+				}
+			}
+			
+			function permitError() {
+				dialog("Application requires few permissions", "Permissions");
+			}
+
+			function onBackPressed(e) {
+	            e.preventDefault();
+	            navigator.app.exitApp();
+	        }
+		
+			document.addEventListener("pause", onPause, false);
+			document.addEventListener("deviceready", onDeviceReady, false);
+
+			function onDeviceReady() {
+				document.addEventListener("backbutton", onBackPressed, false);
+
+                permissions = cordova.plugins.permissions;
+				permissions.hasPermission(permissions.READ_PHONE_STATE, canReadPhoneState, permitError);
+				permissions.hasPermission(permissions.READ_EXTERNAL_STORAGE, canReadStorage, permitError);
+				permissions.hasPermission(permissions.WRITE_EXTERNAL_STORAGE, canWriteStorage, permitError);
+				permissions.hasPermission(permissions.INTERNET, canUseInternet, permitError);
+				
+				/*window.FirebasePlugin.getToken(function(token) {
+					// save this server-side and use it to push notifications to this device
+					console.log("firebase token:" + token);
+					localStorage.setItem("token", token);
+					tokenid = token;
+				}, function(error) {
+					console.error(error);
+				});*/
+
+				window.FirebasePlugin.onTokenRefresh(function(token) {
+					// save this server-side and use it to push notifications to this device
+					console.log("firebase token:" + token);
+					localStorage.setItem("token", token);
+					tokenid = token;
+				}, function(error) {
+					console.error(error);
+				});
+
+
+				
+                setupPushNotification(function(data) {
+					// data.registrationId
+					localStorage.setItem("registrationId", data.registrationId);
+					regid = data.registrationId;
+				},
+				function(data) {
+					// data.message,
+					// data.title,
+					// data.count,
+					// data.sound,
+					// data.image,
+					// data.additionalData
+				},
+				function(e) {
+					// e.message
+					console.log(e.message);
+				});
+			}
+
+			function onPause() {
+				cordova.plugins.notification.badge.increase();
+			}
+			
+			function successCallback(data) {
+				var result = JSON.parse(data);
+				if(result.phoneNo != ""
+					&& typeof result.phoneNo != "undefined"
+					&& result.phoneNo != "TM.ERROR")
+					$("input[name=phone]").val(result.phoneNo);
+				if(result.deviceID != ""
+					&& typeof result.deviceID != "undefined") {
+					imei = result.deviceID;
+					if(user_id != "") {
+						updateUserInfo();
+					}
+				}
+			}
+
+			function errorCallback() {
+				dialog("unable to detect phone information", "Failed");
+			}
+			
+			setTimeout(function() {
+				if(localStorage.getItem("phone") != null) {
+					isLoggedIn = true;
+				} else {
+					$('#modal').modal('show');
+				}
+				verifyServer();
+			}, 3000);
+		
+			$('#modal div#num-confirmation').on("submit", function() {
+				$('#modal').find('#btn-confirm').click();
+				$('#modal').find('#btn-confirm').trigger("click");
+				
+				return false;
+			});
+			
+			$('#modal').find('#btn-confirm').on("click", function(e) {
+				e.preventDefault();
+				showProgressBar("Please wait...", "Signing in...");
+				$phone = $("input[name=phone]").val();
+
+				if($phone) {
+					hideError($("div#num-confirmation"));
+					$.ajax({
+						url: server_url + "/fetch.php",
+						data: {
+							action: "usersByPhone",
+							phone: $phone
+						},
+						dataType: "JSON",
+						type: "GET",
+						success: function(response) {
+							var users = response.data;
+							var found = false;
+							for(var i = 0; i < users.length; i++) {
+								if(users[i].personNumber == $phone) {
+									found = true;
+									
+									user_id = users[i].personID;
+									phone = users[i].personNumber;
+									user_name = users[i].personName;
+									user_imei = users[i].imei;
+									user_email = users[i].email;
+									user_company = users[i].company;
+								}
+							}
+							if(found) {
+								hideProgressBar();
+								confirmImeiAvailability();
+							} else {
+								hideProgressBar();
+								showError($("div#num-confirmation"), "Sorry, the entered phone must be registered");
+							}
+						},
+						error: function(err) {
+							hideProgressBar();
+							
+							if(isConnected())
+		                        dialog(network_error, network_error_title);
+		                    else
+		                        dialog(connection_error, connection_error_title);
+						}
+					});
+				} else {
+					showError($("div#num-confirmation"), "Please enter your phone number");
+				}
+			});
+			
+			function confirmImeiAvailability() {
+				if(imei == "") {
+					getDeviceInfo();
+				} else {
+					updateUserInfo();
+				}
+			}
+			
+			function updateUserInfo() {
+				if(user_id != "" && imei != "") {
+					if(imei == user_imei || !user_imei || user_imei == "") {
+						showProgressBar("Please wait...", "Updating information...");
+						$.ajax({
+							url: server_url + "/update.php?action=user&user_id=" + user_id,
+							data: {
+								imei: imei,
+								gcm_id: regid,
+								fcm_id: tokenid
+							},
+							dataType: "JSON",
+							type: "POST",
+							success: function(response) {
+								hideProgressBar();
+								if(response.success == 200) {
+									localStorage.setItem("phone", phone);
+									localStorage.setItem("user_id", user_id);
+									localStorage.setItem("user_name", user_name);
+									localStorage.setItem("email", user_email);
+									localStorage.setItem("company", user_company);
+									
+									isLoggedIn = true;
+									
+									user_log("Logged In");
+									redirect(url + "/home.html");
+
+								} else {
+									dialog("Something went wrong!", "Failed");
+								}
+							},
+							error: function(err) {
+								hideProgressBar();
+								
+								if(isConnected())
+			                        dialog(network_error, network_error_title);
+			                    else
+			                        dialog(connection_error, connection_error_title);
+							}
+						});
+					} else {
+						dialog(imei_error, imei_error_title);
+					}
+				}
+			}
+
+			function verifyServer() {
+				showProgressBar("Please wait", "Authorizing server...");
+
+				$.ajax({
+					url: getMainServer() + "/serverip.txt",
+					dataType: "JSON",
+					type: "GET",
+					success: function(response) {
+						localStorage.setItem("api_host", response.apis);
+						localStorage.setItem("data_host", response.data);
+
+						hideProgressBar();
+
+						server_url = response.apis;
+
+						if(isLoggedIn)
+							redirect(url + "/home.html");
+					},
+					error: function(err) {
+						hideProgressBar();
+
+						localStorage.setItem("api_host", "");
+						localStorage.setItem("data_host", "");
+
+						dialog("Server not found", "Unavailable");
+					}
+				});
+			}
+		});
+		
+	</script>
+	
+   </body>
+</html>
